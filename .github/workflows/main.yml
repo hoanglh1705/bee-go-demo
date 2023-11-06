@@ -10,11 +10,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Install dependency
-        run: go mod download
+        run: make mod
       - name: Unit test
-        run: 
-          make mod
-          make test
+        run: make test
         continue-on-error: false
   build:
     runs-on: [self-hosted, Linux]
