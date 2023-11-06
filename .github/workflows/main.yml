@@ -20,9 +20,9 @@ jobs:
     steps:
       - name: Login docker registry
         run: sudo docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}
-        env:
-          DOCKER_USERNAME: ${{ env.DOCKER_USERNAME }}
-          DOCKER_PASSWORD: ${{ env.DOCKER_PASSWORD }}
+        with:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
       - name: Change script permission
         run: chmod +x build_image.sh
       - name: Build
