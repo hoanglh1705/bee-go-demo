@@ -16,7 +16,7 @@ services:
       - /var/lib/postgresql/data
 
   api:
-    image: hoangledev/beegoci
+    image: bee-go-demo
     restart: always
     ports:
       - 80:80
@@ -24,6 +24,6 @@ services:
       - /data/log:/app/log
       - ./.env:/app/.env
     network_mode: "host"
-    
+
 volumes:
   db-data:
