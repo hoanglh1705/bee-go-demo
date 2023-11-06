@@ -15,5 +15,15 @@ services:
     volumes:
       - /var/lib/postgresql/data
 
+  api:
+    image: hoangledev/beegoci
+    restart: always
+    ports:
+      - 80:80
+    volumes:
+      - /data/log:/app/log
+      - ./.env:/app/.env
+    network_mode: "host"
+    
 volumes:
   db-data:

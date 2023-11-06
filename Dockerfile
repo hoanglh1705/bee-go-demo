@@ -1,9 +1,9 @@
 # syntax=docker/dockerfile:1
 
-FROM golang:1.20-alpine
+FROM golang:1.20-alpine as BUILDER
 
 # Set destination for COPY
-WORKDIR $GOPATH/src/bee-go-demo
+WORKDIR /go/src/bee-go-demo
 
 # Download Go modules
 COPY go.mod go.sum ./
@@ -13,17 +13,14 @@ RUN go mod download
 # https://docs.docker.com/engine/reference/builder/#copy
 COPY . .
 
-RUN apk add g++
+RUN go mod vendor
+
 # Build
-RUN CGO_ENABLED=0 GOOS=linux go build -o ./out/bee-go-demo/ ./cmd/server/
+RUN CGO_ENABLED=0 GOOS=linux go build -o /go/src/bee-go-demo/main ./cmd/server/
 
-# Optional:
-# To bind to a TCP port, runtime parameters must be supplied to the docker command.
-# But we can document in the Dockerfile what ports
-# the application is going to listen on by default.
-# https://docs.docker.com/engine/reference/builder/#expose
-EXPOSE 8088
 
-RUN chmod +x ./out/bee-go-demo
-
-CMD ["./out/bee-go-demo"]
+FROM alpine
+EXPOSE 80
+WORKDIR /bee-go-demo
+COPY --from=BUILDER /go/src/bee-go-demo/main /bee-go-demo
+CMD /bee-go-demo/main
