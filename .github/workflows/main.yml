@@ -5,6 +5,11 @@ on:
   pull_request:
     branches: [ main, master, develop ]
 jobs:
+  download: 
+    runs-on: [self-hosted, Linux]
+    steps: 
+      - name: Install dependency
+        run: make mod
   test:
     runs-on: [self-hosted, Linux]
     steps:
