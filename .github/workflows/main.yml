@@ -5,11 +5,6 @@ on:
   pull_request:
     branches: [ main, master, develop ]
 jobs:
-  download: 
-    runs-on: [self-hosted, Linux]
-    steps: 
-      - name: Install dependency
-        run: make mod
   test:
     runs-on: [self-hosted, Linux]
     steps:
@@ -17,7 +12,9 @@ jobs:
       - name: Install dependency
         run: go mod download
       - name: Unit test
-        run: make test
+        run: 
+          make mod
+          make test
         continue-on-error: false
   build:
     runs-on: [self-hosted, Linux]
