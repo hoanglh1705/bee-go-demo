@@ -21,3 +21,6 @@ mod:
 
 run: 
 	@go run cmd/server/main.go
+
+build-image:
+	@docker build --tag bee-go-demo .

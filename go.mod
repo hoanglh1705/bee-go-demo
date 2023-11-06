@@ -7,6 +7,7 @@ require github.com/beego/beego/v2 v2.1.3
 require (
 	github.com/opentracing-contrib/go-stdlib v0.0.0-20190519235532-cf7a6c988dc9 // indirect
 	github.com/opentracing/opentracing-go v1.2.0 // indirect
+	github.com/valyala/bytebufferpool v1.0.0 // indirect
 )
 
 require (
@@ -15,6 +16,7 @@ require (
 	github.com/golang/protobuf v1.5.3 // indirect
 	github.com/hashicorp/golang-lru v0.5.4 // indirect
 	github.com/kr/text v0.2.0 // indirect
+	github.com/lib/pq v1.10.9
 	github.com/matttproud/golang_protobuf_extensions v1.0.4 // indirect
 	github.com/mitchellh/mapstructure v1.5.0 // indirect
 	github.com/opentracing-contrib/beego v0.0.0-20190807091843-a0eec2f7e67c

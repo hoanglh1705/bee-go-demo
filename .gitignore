@@ -1,0 +1,27 @@
+# Compiled Object files, Static and Dynamic libs (Shared Objects)
+*.o
+*.a
+*.so
+.DS_Store
+
+.pid
+profile.out
+coverage.out
+coverage-all.out
+
+/.vscode
+/server
+/vendor
+/swaggerui
+*.local
+/up.json
+*.code-workspace
+/test.go
+/testaes.go
+/testuph.go
+
+node_modules
+/merchant_data.json
+/test-way4.go
+/logs
+/.idea

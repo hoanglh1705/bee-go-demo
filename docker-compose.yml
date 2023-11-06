@@ -1,0 +1,19 @@
+version: "3"
+services:
+  db:
+    platform: linux/x86_64
+    image: postgres:13
+    container_name: myuser.db
+    ports:
+      - "5443:5432"
+    environment:
+      POSTGRES_ROOT_PASSWORD: password
+      POSTGRES_DATABASE: myuser
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: user123
+      TZ: UTC
+    volumes:
+      - /var/lib/postgresql/data
+
+volumes:
+  db-data:
