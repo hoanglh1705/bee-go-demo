@@ -22,5 +22,14 @@ mod:
 run: 
 	@go run cmd/server/main.go
 
+test:
+	go test -v ./...
+
+cover:
+	./cover ./...
+
+build:
+	go build ./cmd/server/main.go
+
 build-image:
 	@docker build --tag bee-go-demo .
