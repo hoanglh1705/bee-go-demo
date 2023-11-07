@@ -5,7 +5,7 @@ import "time"
 // User represents the user model
 // swagger:model
 type User struct {
-	ID          int        `json:"id" orm:"primary"`
+	Id          int        `json:"id"`
 	Code        string     `json:"code" orm:"size(16)"`
 	Status      string     `json:"status" orm:"size(64)"`
 	FirstName   string     `json:"first_name" orm:"size(32)"`
