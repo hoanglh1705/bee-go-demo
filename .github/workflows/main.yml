@@ -30,8 +30,9 @@ jobs:
         run: sudo ./build_image.sh
   deploy:
     runs-on: [self-hosted, Linux]
+    needs: [build]
     container:
-      image: bee-go-demo:latest
+      image: lhhoangit/bee-go-demo:latest
       env:
         UP_STAGE: development
       ports:
