@@ -28,3 +28,17 @@ jobs:
         run: chmod +x build_image.sh
       - name: Build
         run: sudo ./build_image.sh
+  deploy:
+    runs-on: [self-hosted, Linux]
+    container:
+      image: bee-go-demo:latest
+      env:
+        UP_STAGE: development
+      ports:
+        - 80
+      volumes:
+        - my_docker_volume:/volume_mount
+      options: --cpus 1
+    steps:
+      - name: Check for dockerenv file
+        run: (ls /.dockerenv && echo Found dockerenv) || (echo No dockerenv)

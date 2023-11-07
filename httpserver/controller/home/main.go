@@ -7,6 +7,11 @@ import (
 
 type HomeController struct {
 	web.Controller
+	path string
+}
+
+func (c *HomeController) GetPath() (path string) {
+	return c.path
 }
 
 func NewHomeController(path string) *HomeController {
@@ -17,6 +22,8 @@ func NewHomeController(path string) *HomeController {
 	web.BConfig.AppName = "my app"
 
 	ctrl := &HomeController{}
+	ctrl.path = path
+
 	web.Router("/hello", ctrl, "get:Hello")
 	fb := &prometheus.FilterChainBuilder{}
 	web.InsertFilterChain("/*", fb.FilterChain)
