@@ -21,7 +21,7 @@ APP: bee-go-demo
 UP_STAGE: dev
 HOST: localhost
 PORT: 8088
-DB_DSN: postgres://auth:auth123@authdb.cozhhzyndzwt.ap-southeast-1.rds.amazonaws.com:5432/dbauth?sslmode=disable&connect_timeout=5
+DB_DSN: postgres://user:user123@localhost:5443/myuser?sslmode=disable&connect_timeout=5
 `)
 
 func Load() (*Configuration, error) {
