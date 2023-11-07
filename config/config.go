@@ -8,17 +8,18 @@ import (
 )
 
 type Configuration struct {
+	AppName     string `mapstructure:"APP"`
 	Stage       string `mapstructure:"UP_STAGE"`
 	ConfigStage string `mapstructure:"CONFIG_STAGE"`
-	Region      string `mapstructure:"REGION"`
 	Host        string `mapstructure:"HOST"`
 	Port        int    `mapstructure:"PORT"`
 	DbDsn       string `mapstructure:"DB_DSN"`
 }
 
 var defaultConfig = []byte(`
-app: pm-back-office
-env: dev
+APP: bee-go-demo
+UP_STAGE: dev
+HOST: localhost
 PORT: 8088
 DB_DSN: postgres://postgres:postgres123@authdb.cozhhzyndzwt.ap-southeast-1.rds.amazonaws.com:5432/authdb?sslmode=disable&connect_timeout=5
 `)

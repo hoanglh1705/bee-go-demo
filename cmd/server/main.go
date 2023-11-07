@@ -33,7 +33,7 @@ func main() {
 	web.Router(fileCtrl.GetPath(), fileCtrl)
 	web.Router(mainCtrl.GetPath(), mainCtrl)
 
-	web.RunWithMiddleWares("localhost:8080", apmbeego.Middleware("bee-go-demo"))
+	web.RunWithMiddleWares(fmt.Sprintf("%v:%d", cfg.Host, cfg.Port), apmbeego.Middleware("bee-go-demo"))
 	// lambda.Start()
 
 }

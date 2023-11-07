@@ -25,7 +25,7 @@ jobs:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
       - name: Change script permission
-        run: chmod +x build_image.sh
+        run: sudo chmod +x ./build_image.sh
       - name: Build
         run: sudo ./build_image.sh
   deploy:
