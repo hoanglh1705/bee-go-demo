@@ -41,6 +41,12 @@ jobs:
         - my_docker_volume:/volume_mount
       options: --cpus 1
     steps:
+      - name: Login docker registries
+        run:
+          sudo docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
       - uses: addnab/docker-run-action@v3
         with:
           image: bee-go-demo:latest
