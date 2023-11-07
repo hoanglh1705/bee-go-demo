@@ -18,12 +18,12 @@ jobs:
     runs-on: [self-hosted, Linux]
     needs: [test]
     steps:
-      # - name: Login docker registries
-      #   run:
-      #     -sudo docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}
-      #   env:
-      #     DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-      #     DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+      - name: Login docker registries
+        run:
+          -sudo docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
       - name: Change script permission
         run: chmod +x build_image.sh
       - name: Build
