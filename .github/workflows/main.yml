@@ -41,5 +41,7 @@ jobs:
         - my_docker_volume:/volume_mount
       options: --cpus 1
     steps:
-      - name: Check for dockerenv file
-        run: (ls /.dockerenv && echo Found dockerenv) || (echo No dockerenv)
+      - uses: addnab/docker-run-action@v3
+        with:
+          image: bee-go-demo:latest
+          run: echo "hello world"
