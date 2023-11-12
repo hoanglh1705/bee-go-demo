@@ -2,19 +2,27 @@ package user
 
 import (
 	"bee-go-demo/httpserver/controller/dto"
+	"bee-go-demo/model"
 	"encoding/json"
 
+	userrepository "bee-go-demo/httpserver/repository/user"
+
 	"github.com/beego/beego/v2/server/web"
+	"github.com/jinzhu/copier"
 )
 
 type UserController struct {
 	web.Controller
-	path string
+	path           string
+	userRepository userrepository.UserRepository
 }
 
-func NewUserController(path string) *UserController {
+func NewUserController(path string,
+	userRepository userrepository.UserRepository,
+) *UserController {
 	ctrl := &UserController{}
 	ctrl.path = path
+	ctrl.userRepository = userRepository
 	web.Router(ctrl.path+"/:name", ctrl, "get:Query")
 	return ctrl
 }
@@ -35,7 +43,14 @@ func (ctrl *UserController) Post() {
 		ctrl.Data["json"] = err.Error()
 	}
 
-	ctrl.Data["json"] = input
+	user := &model.User{}
+	_ = copier.Copy(user, input)
+	currentUser, err := ctrl.userRepository.Insert(ctrl.Ctx.Request.Context(), user)
+	if err != nil {
+		ctrl.Redirect("/", 302)
+	}
+
+	ctrl.Data["json"] = currentUser
 	ctrl.ServeJSON()
 }
 

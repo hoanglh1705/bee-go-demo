@@ -5,12 +5,16 @@ import (
 	filecontroller "bee-go-demo/httpserver/controller/file"
 	homecontroller "bee-go-demo/httpserver/controller/home"
 	usercontroller "bee-go-demo/httpserver/controller/user"
+	userrepository "bee-go-demo/httpserver/repository/user"
 	"fmt"
+	"net/http"
+	"text/template"
 
 	mydb "bee-go-demo/db"
 
 	apmbeego "github.com/opentracing-contrib/beego"
 
+	"github.com/beego/beego/v2/client/orm"
 	"github.com/beego/beego/v2/server/web"
 )
 
@@ -23,12 +27,16 @@ func main() {
 
 	web.BConfig.CopyRequestBody = true
 	mydb.Init(cfg)
+	o := orm.NewOrm()
+	userRepository := userrepository.NewUserRepository(o)
+
 	// Init Controllers
-	userCtrl := usercontroller.NewUserController("/users")
+	userCtrl := usercontroller.NewUserController("/users", userRepository)
 	fileCtrl := filecontroller.NewFileController("/files")
 	mainCtrl := homecontroller.NewHomeController("/")
 
 	// Register Controllers
+	web.ErrorHandler("404", page_not_found)
 	web.Router(userCtrl.GetPath(), userCtrl)
 	web.Router(fileCtrl.GetPath(), fileCtrl)
 	web.Router(mainCtrl.GetPath(), mainCtrl)
@@ -36,4 +44,11 @@ func main() {
 	web.RunWithMiddleWares(fmt.Sprintf("%v:%d", cfg.Host, cfg.Port), apmbeego.Middleware("bee-go-demo"))
 	// lambda.Start()
 
+}
+
+func page_not_found(rw http.ResponseWriter, r *http.Request) {
+	t, _ := template.ParseFiles(web.BConfig.WebConfig.ViewsPath + "/404.html")
+	data := make(map[string]interface{})
+	data["content"] = "page not found"
+	t.Execute(rw, data)
 }
