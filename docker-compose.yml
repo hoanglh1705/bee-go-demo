@@ -15,15 +15,15 @@ services:
     volumes:
       - /var/lib/postgresql/data
 
-  # api:
-  #   image: bee-go-demo
-  #   restart: always
-  #   ports:
-  #     - 8098:8188
-  #   volumes:
-  #     # - ./.env:/app/.env
-  #     - /var/lib/bee-go-demo/data
-  #   network_mode: "host"
+  api:
+    image: bee-go-demo
+    restart: always
+    ports:
+      - 8098:8188
+    volumes:
+      # - ./.env:/app/.env
+      - /var/lib/bee-go-demo/data
+    network_mode: "host"
 
 volumes:
   db-data:

@@ -20,7 +20,7 @@ var defaultConfig = []byte(`
 APP: bee-go-demo
 UP_STAGE: dev
 HOST: localhost
-PORT: 8088
+PORT: 8188
 DB_DSN: postgres://user:user123@localhost:5443/myuser?sslmode=disable&connect_timeout=5
 `)
 

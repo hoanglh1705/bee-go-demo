@@ -16,6 +16,7 @@ import (
 
 	"github.com/beego/beego/v2/client/orm"
 	"github.com/beego/beego/v2/server/web"
+	"github.com/beego/beego/v2/server/web/filter/prometheus"
 )
 
 func main() {
@@ -40,6 +41,9 @@ func main() {
 	web.Router(userCtrl.GetPath(), userCtrl)
 	web.Router(fileCtrl.GetPath(), fileCtrl)
 	web.Router(mainCtrl.GetPath(), mainCtrl)
+
+	fb := &prometheus.FilterChainBuilder{}
+	web.InsertFilterChain("/*", fb.FilterChain)
 
 	web.RunWithMiddleWares(fmt.Sprintf("%v:%d", cfg.Host, cfg.Port), apmbeego.Middleware("bee-go-demo"))
 	// lambda.Start()

@@ -23,4 +23,4 @@ FROM alpine
 EXPOSE 80
 WORKDIR /bee-go-demo
 COPY --from=BUILDER /go/src/bee-go-demo/main /bee-go-demo
-CMD /bee-go-demo/main
+CMD ["/bee-go-demo/main"]
